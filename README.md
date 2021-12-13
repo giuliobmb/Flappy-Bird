@@ -1,2 +1,4 @@
 # Flappy Bird
- Flappy Bird js
+ Flappy Bird written in vanilla JS for browsers
+ 
+ Using canvas as 2D context.
