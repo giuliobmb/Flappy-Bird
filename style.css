@@ -2,3 +2,13 @@
     margin:none;
     padding:none;
 }
+
+body{
+    text-align: center;
+}
+
+canvas{
+    border:solid 1px;
+    width: 320px;
+    height: 560px;
+}
