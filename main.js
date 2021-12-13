@@ -40,12 +40,6 @@ const elements = {
 let game = new Game(elements, sprites);
 
 
-
-
-
-
-
-
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.setup();
