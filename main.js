@@ -9,10 +9,9 @@ const sprites = new Image();
 sprites.src = 'SPRITES.png';
 
 
-
 ctx.drawImage(sprites, 100, 100);
 
-const background = new Sprite(sprites, 0, 0, 15, 15);
+const background = new Sprite(sprites, 0, 0, 100, 150);
 
-background.draw(0, 0, 15, 15);
+background.draw(0, 0, 150, 150);
 
