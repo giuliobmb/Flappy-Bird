@@ -6,10 +6,8 @@
 Cheatsheet:
 
 vAs: vector source axes(x, y)
-
 vDs: vector source dimensions(w, h)
 
 
 vAd: vector destination axes(x, y)
-
 vDd: vector destination dimensions(w, h)
