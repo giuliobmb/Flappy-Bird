@@ -18,8 +18,14 @@ const background = new Sprite(sprites, 0, 0, 153, 957);
 
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let dX=0
+    let dY=0;
+    let dW=320;
+    let dH=560;
     
-    background.draw(0, 0, dW, dH);
+    background.draw(dX, dY, dW, dH);
+
+    
     
     window.requestAnimationFrame(gameloop);
 }
