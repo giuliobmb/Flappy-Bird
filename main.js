@@ -9,9 +9,19 @@ const sprites = new Image();
 sprites.src = 'SPRITES.png';
 
 
-ctx.drawImage(sprites, 100, 100);
+//ctx.drawImage(sprites, 100, 100);
 
-const background = new Sprite(sprites, 0, 0, 100, 150);
+const background = new Sprite(sprites, 0, 0, 153, 957);
 
-background.draw(0, 0, 150, 150);
 
+
+
+function gameloop(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    background.draw(0, 0, dW, dH);
+    
+    window.requestAnimationFrame(gameloop);
+}
+
+gameloop();
