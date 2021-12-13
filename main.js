@@ -22,13 +22,8 @@ let dH=560;
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    dX--;
-    
-    background.draw(dX, dY, dW, dH);
-    background.draw(dX+dW, dY, dW, dH);
+    background.draw(dX, dY, dW, dH);;
 
-    if(dX<dW*-1)
-        dX = 0;
 
     
     
