@@ -9,8 +9,16 @@ const sprites = new Image();
 sprites.src = 'SPRITES.png';
 
 
+const elements = {
+    background: null,
+    terrain: null,
+    logo: null,
+    bird: null,
+    getReady: null
+}
 
-let game = new Game(sprites)
+
+let game = new Game(elements, sprites);
 
 
 
@@ -22,6 +30,7 @@ let game = new Game(sprites)
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.setup();
+    game.setMode(0);
     
     requestAnimationFrame(gameloop);
 }
