@@ -92,8 +92,6 @@ class Game{
 
         let dTerrain = this.elements.terrain.entity.copy();
 
-        console.log(dTerrain);
-
         dTerrain.set(this.elements.terrain.vAd.sum(new Vector(314, 0)), this.elements.terrain.vDd);
         
         this.elements.terrain.vAd.x--;
@@ -102,9 +100,8 @@ class Game{
             this.elements.terrain.vAd.x = 0
 
         
-        this.elements.block1.set(new Vector(10, this.y), new Vector(10, 10));
-    
-        //this.elements.block2.set(new Vector(21, 21), new Vector(25, 25));
+        //this.elements.block1.set(new Vector(10, 10), new Vector(25, 25));
+        //this.elements.block2.set(new Vector(35, 35), new Vector(25, 25));
         //console.log(this.elements.block1.collision(this.elements.block2));
 
     }
