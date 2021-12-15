@@ -29,6 +29,11 @@ class Vector{
         let y = this.y;
         return new Vector(x -= vector.x, y -= vector.y);
     }
+    divide(number){
+        let x = this.x;
+        let y = this.y;
+        return new Vector(x / number, y / number);
+    }
     compare(vector){
         let sV = this.sub(vector);
         if(sV.x >= 0 && sV.y >= 0)
@@ -70,9 +75,8 @@ class Game{
     setup(){
         this.elements.background.entity = new Entity(new Sprite(this.sprites, this.elements.background.vAs, this.elements.background.vDs));
         this.elements.terrain.entity = new Entity(new Sprite(this.sprites, this.elements.terrain.vAs, this.elements.terrain.vDs));
-
-        this.elements.block1 = new Entity(new Sprite(testSprite, new Vector(10, 10), new Vector(10, 10)));
-        this.elements.block2 = new Entity(new Sprite(testSprite, new Vector(10, 10), new Vector(10, 10)));
+        this.elements.bird.entity = new Entity(new Sprite(this.sprites, this.elements.bird.vAs, this.elements.bird.vDs));
+        
         
     }
     setMode(mode){
@@ -86,23 +90,23 @@ class Game{
     }
 
     start(){
-        
+        //position 0 entities
         this.elements.background.entity.set(this.elements.background.vAd, this.elements.background.vDd);
         this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
-
-        let dTerrain = this.elements.terrain.entity.copy();
-
-        dTerrain.set(this.elements.terrain.vAd.sum(new Vector(314, 0)), this.elements.terrain.vDd);
         
-        this.elements.terrain.vAd.x--;
+        this.elements.bird.entity.set(new Vector(160, 240), new Vector(25,25));
 
+        
+
+        //moving terrain
+        let dTerrain = this.elements.terrain.entity.copy();
+        dTerrain.set(this.elements.terrain.vAd.sum(new Vector(314, 0)), this.elements.terrain.vDd);
+        this.elements.terrain.vAd.x--;
         if(this.elements.terrain.vAd.sum(new Vector(314, 0)).x < 0)
             this.elements.terrain.vAd.x = 0
-
+        // 
         
-        //this.elements.block1.set(new Vector(10, 10), new Vector(25, 25));
-        //this.elements.block2.set(new Vector(35, 35), new Vector(25, 25));
-        //console.log(this.elements.block1.collision(this.elements.block2));
+        
 
     }
 
