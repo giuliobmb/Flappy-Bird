@@ -71,6 +71,9 @@ class Game{
         this.elements = elements;
         this.sprites = sprites;
         this.mode;
+        this.birdSpeed = 2.3;
+        this.jumping = false;
+        this.jumped = 0;
     }
     setup(){
         this.elements.background.entity = new Entity(new Sprite(this.sprites, this.elements.background.vAs, this.elements.background.vDs));
@@ -89,24 +92,40 @@ class Game{
         }
     }
 
+    handleJump(){
+        if(this.jumping == true || this.jumped < 15 && this.jumped > 0){
+            this.elements.bird.vAd.y -= 5;
+            this.jumped += 1;
+        }else{
+            this.jumped = 0;
+        }
+    }
+
     start(){
         //position 0 entities
         this.elements.background.entity.set(this.elements.background.vAd, this.elements.background.vDd);
         this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
-        
-        this.elements.bird.entity.set(new Vector(160, 240), new Vector(25,25));
+        this.elements.bird.entity.set(this.elements.bird.vAd, new Vector(25,25));
 
         
 
         //moving terrain
         let dTerrain = this.elements.terrain.entity.copy();
         dTerrain.set(this.elements.terrain.vAd.sum(new Vector(314, 0)), this.elements.terrain.vDd);
-        this.elements.terrain.vAd.x--;
+        this.elements.terrain.vAd.x -= 0.6;
         if(this.elements.terrain.vAd.sum(new Vector(314, 0)).x < 0)
             this.elements.terrain.vAd.x = 0
-        // 
-        
-        
+        //
+
+        //bird fall
+        this.elements.bird.vAd.y += this.birdSpeed;
+        if(this.elements.bird.vAd.y > this.elements.terrain.vAd.y-20)
+        this.elements.bird.vAd.y = this.elements.terrain.vAd.y-20;
+
+
+        //bird jump
+        this.handleJump();
+
 
     }
 

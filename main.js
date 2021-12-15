@@ -28,7 +28,8 @@ const elements = {
     },
     bird: {
         vAs: new Vector(223, 122),
-        vDs: new Vector(17, 17)
+        vDs: new Vector(17, 17),
+        vAd: new Vector(148.5, 240)
     },
     getReady: {
         vAs: new Vector(0, 0),
@@ -39,6 +40,8 @@ const elements = {
 
 let game = new Game(elements, sprites);
 
+let jumping = false;
+
 
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -47,5 +50,13 @@ function gameloop(){
     
     requestAnimationFrame(gameloop);
 }
+
+window.addEventListener('mousedown', () => {
+    game.jumping = true;
+})
+
+window.addEventListener('mouseup', () => {
+    game.jumping = false;
+})
 
 gameloop();
