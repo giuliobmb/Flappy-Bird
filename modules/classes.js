@@ -75,7 +75,10 @@ class Game{
         this.jumping = false;
         this.jumped = 0;
         this.coloumnSpeed = 3;
-        this.cDistance = Math.random()*300 + 100;
+        this.c0Distance = Math.random()*200 + 120;
+        this.c1Distance = Math.random()*200 + 120;
+        this.dVAdU = this.elements.coloumns[0].vAd;//duplicate vector axis up coloumns
+        this.dVAdD = this.elements.coloumns[1].vAd;//duplicate vector axis down coloumns
     }
     setup(){
         this.elements.background.entity = new Entity(new Sprite(this.sprites, this.elements.background.vAs, this.elements.background.vDs));
@@ -112,17 +115,30 @@ class Game{
         
         
         //coloumns 
-        let dColoumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
+        let d0Coloumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
+        let d1Coloumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
+
+        this.elements.coloumns[0].vAd = this.elements.coloumns[0].vAd.sub(new Vector(this.coloumnSpeed, 0))
+        this.elements.coloumns[1].vAd = this.elements.coloumns[1].vAd.sub(new Vector(this.coloumnSpeed, 0))
         
-        this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[0].vDd);
-        this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[1].vDd);
+        let y =Math.random()*200 + 120;
 
-        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed-this.cDistance, 0)), this.elements.coloumns[0].vDd);
-        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed-this.cDistance, 0)), this.elements.coloumns[1].vDd);
+        this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd, this.elements.coloumns[0].vDd);
+        this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd, this.elements.coloumns[1].vDd);
+        
+        let dVAdU;//duplicate vector axis up coloumns
+        let dVAdD;//duplicate vector axis down coloumns
 
-        if(this.elements.coloumns[0].x < 0){
-            this.elements.coloumns[0].x = 320;
-            this.elements.coloumns[1].x = 320;
+        if(this.elements.coloumns[0].vAd.x < -60){
+            this.elements.coloumns[0].vAd.x = 320;
+            this.elements.coloumns[1].vAd.x = 320;
+            this.c0Distance = Math.random()*200 + 100;
+            this.c1Distance = Math.random()*200 + 100;
+        }else if(this.elements.coloumns[0].vAd.x < this.dVAdU.x){
+            this.dVAdU = this.elements.coloumns[0].vAd;
+            this.dVAdD = this.elements.coloumns[1].vAd;
+        }else{
+            this.dVAdU;
         }
 
 
@@ -148,6 +164,11 @@ class Game{
 
         //bird jump
         this.handleJump();
+
+        //collisions
+        if(this.elements.bird.entity.collision(this.elements.coloumns[0].entity)){
+
+        }
 
 
     }
