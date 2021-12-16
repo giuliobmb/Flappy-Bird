@@ -74,12 +74,14 @@ class Game{
         this.birdSpeed = 2.3;
         this.jumping = false;
         this.jumped = 0;
+        this.coloumnSpeed = 30;
     }
     setup(){
         this.elements.background.entity = new Entity(new Sprite(this.sprites, this.elements.background.vAs, this.elements.background.vDs));
         this.elements.terrain.entity = new Entity(new Sprite(this.sprites, this.elements.terrain.vAs, this.elements.terrain.vDs));
         this.elements.bird.entity = new Entity(new Sprite(this.sprites, this.elements.bird.vAs, this.elements.bird.vDs));
-        
+        this.elements.coloumns[0].entity =  new Entity(new Sprite(this.sprites, this.elements.coloumns[0].vAs, this.elements.coloumns[0].vDs));
+        this.elements.coloumns[1].entity =  new Entity(new Sprite(this.sprites, this.elements.coloumns[1].vAs, this.elements.coloumns[1].vDs));
         
     }
     setMode(mode){
@@ -93,9 +95,9 @@ class Game{
     }
 
     handleJump(){
-        if(this.jumping == true || this.jumped < 15 && this.jumped > 0){
-            this.elements.bird.vAd.y -= 5;
-            this.jumped += 1;
+        if(this.jumping == true || this.jumped < 6 && this.jumped > 0){
+            this.elements.bird.vAd.y -= 4;
+            this.jumped += 0.3;
         }else{
             this.jumped = 0;
         }
@@ -104,11 +106,22 @@ class Game{
     start(){
         //position 0 entities
         this.elements.background.entity.set(this.elements.background.vAd, this.elements.background.vDd);
-        this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
         this.elements.bird.entity.set(this.elements.bird.vAd, new Vector(25,25));
+        
+        
+        
+        //coloumns 
+        let dColoumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
 
+        this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[0].vDd);
+        this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[1].vDd);
 
+        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed+Math.random()*100, 0)), this.elements.coloumns[0].vDd);
+        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed+Math.random()*100, 0)), this.elements.coloumns[1].vDd);
+        this.coloumnSpeed--;
+        
         //moving terrain
+        this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
         let dTerrain = this.elements.terrain.entity.copy();
         dTerrain.set(this.elements.terrain.vAd.sum(new Vector(314, 0)), this.elements.terrain.vDd);
         this.elements.terrain.vAd.x -= 0.6;
@@ -116,6 +129,10 @@ class Game{
             this.elements.terrain.vAd.x = 0
         
 
+        
+
+
+        
         //bird fall
         this.elements.bird.vAd.y += this.birdSpeed;
         if(this.elements.bird.vAd.y > this.elements.terrain.vAd.y-20)
@@ -125,7 +142,7 @@ class Game{
         //bird jump
         this.handleJump();
 
-        
+
     }
 
 

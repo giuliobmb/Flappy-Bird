@@ -33,16 +33,16 @@ const elements = {
     },
     coloumns: [
         {
-            vAs: new Vector(150, 1),
-            vDs: new Vector(143, 55),
-            vAd: new Vector(0, 380),
-            vDd: new Vector(320, 100)
+            vAs: new Vector(302, 1),
+            vDs: new Vector(26, 136),
+            vAd: new Vector(320, 0),
+            vDd: new Vector(60, 180)
         },
         {
-            vAs: new Vector(150, 1),
-            vDs: new Vector(143, 55),
-            vAd: new Vector(0, 380),
-            vDd: new Vector(320, 100)
+            vAs: new Vector(330, 0),
+            vDs: new Vector(26, 136),
+            vAd: new Vector(320, 240),
+            vDd: new Vector(60, 170)
         }
     ],
     getReady: {
