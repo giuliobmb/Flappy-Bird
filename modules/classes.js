@@ -36,7 +36,7 @@ class Vector{
     }
     compare(vector){
         let sV = this.sub(vector);
-        if(sV.x >= 0 && sV.y >= 0)
+        if(sV.x > 0 && sV.y > 0)
             return true;
         else
             return false;
@@ -91,20 +91,26 @@ class Game{
     setMode(mode){
         switch(mode){
             case 0:
-                this.start();
+                this.mode = 0;
+                this.stop();
                 break;
             case 1:
+                this.mode = 1;
+                this.start();
                 break;
         }
     }
 
     handleJump(){
-        if(this.jumping == true || this.jumped < 6 && this.jumped > 0){
-            this.elements.bird.vAd.y -= 4;
-            this.jumped += 0.3;
-        }else{
-            this.jumped = 0;
+        if(this.mode != 0){
+            if(this.jumping == true || this.jumped < 6 && this.jumped > 0){
+                this.elements.bird.vAd.y -= 4;
+                this.jumped += 0.3;
+            }else{
+                this.jumped = 0;
+            }
         }
+        
     }
 
     start(){
@@ -115,31 +121,19 @@ class Game{
         
         
         //coloumns 
-        let d0Coloumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
-        let d1Coloumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
-
-        this.elements.coloumns[0].vAd = this.elements.coloumns[0].vAd.sub(new Vector(this.coloumnSpeed, 0))
-        this.elements.coloumns[1].vAd = this.elements.coloumns[1].vAd.sub(new Vector(this.coloumnSpeed, 0))
-        
-        let y =Math.random()*200 + 120;
 
         this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd, this.elements.coloumns[0].vDd);
         this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd, this.elements.coloumns[1].vDd);
         
-        let dVAdU;//duplicate vector axis up coloumns
-        let dVAdD;//duplicate vector axis down coloumns
-
+        this.elements.coloumns[0].vAd.x-= this.coloumnSpeed;
+        this.elements.coloumns[1].vAd.x-= this.coloumnSpeed;
+        
         if(this.elements.coloumns[0].vAd.x < -60){
             this.elements.coloumns[0].vAd.x = 320;
             this.elements.coloumns[1].vAd.x = 320;
-            this.c0Distance = Math.random()*200 + 100;
-            this.c1Distance = Math.random()*200 + 100;
-        }else if(this.elements.coloumns[0].vAd.x < this.dVAdU.x){
-            this.dVAdU = this.elements.coloumns[0].vAd;
-            this.dVAdD = this.elements.coloumns[1].vAd;
-        }else{
-            this.dVAdU;
         }
+        
+            
 
 
         
@@ -166,12 +160,45 @@ class Game{
         this.handleJump();
 
         //collisions
-        if(this.elements.bird.entity.collision(this.elements.coloumns[0].entity)){
-
+        if(this.elements.bird.entity.collision(this.elements.coloumns[0].entity) || this.elements.bird.entity.collision(this.elements.coloumns[1].entity)){
+            this.setMode(0);
         }
-
-
     }
+
+    stop(){
+        if(this.mode == 0){
+            this.elements.terrain.vAd.x += 0.6;
+            this.elements.coloumns[0].vAd.x+= this.coloumnSpeed;
+            this.elements.coloumns[1].vAd.x+= this.coloumnSpeed;
+            this.elements.bird.vAd.y -= this.birdSpeed;
+            this.elements.bird.entity.set(this.elements.bird.vAd, new Vector(25,25));
+        }
+    }
+
+    reset(){
+        this.elements.bird ={
+            vAs: new Vector(223, 122),
+            vDs: new Vector(17, 17),
+            vAd: new Vector(148.5, 240)
+        }; 
+        this.elements.coloumns = [
+            {
+                vAs: new Vector(302, 1),
+                vDs: new Vector(26, 136),
+                vAd: new Vector(390, 0),
+                vDd: new Vector(60, 180)
+            },
+            {
+                vAs: new Vector(330, 0),
+                vDs: new Vector(26, 136),
+                vAd: new Vector(390, 240),
+                vDd: new Vector(60, 170)
+            }
+        ];
+        this.setup();
+    }
+
+    
 
 
 }

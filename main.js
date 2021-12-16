@@ -35,13 +35,13 @@ const elements = {
         {
             vAs: new Vector(302, 1),
             vDs: new Vector(26, 136),
-            vAd: new Vector(320, 0),
+            vAd: new Vector(390, 0),
             vDd: new Vector(60, 180)
         },
         {
             vAs: new Vector(330, 0),
             vDs: new Vector(26, 136),
-            vAd: new Vector(320, 240),
+            vAd: new Vector(390, 240),
             vDd: new Vector(60, 170)
         }
     ],
@@ -60,17 +60,23 @@ let jumping = false;
 function gameloop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.setup();
-    game.setMode(0);
+    game.setMode(1);
     
     requestAnimationFrame(gameloop);
 }
 
 window.addEventListener('mousedown', () => {
     game.jumping = true;
+    
+    if(game.mode == 0){
+        game.setMode(1);
+        game.reset();
+    }
 })
 
 window.addEventListener('mouseup', () => {
     game.jumping = false;
+
 })
 
 gameloop();
