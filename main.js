@@ -31,6 +31,20 @@ const elements = {
         vDs: new Vector(17, 17),
         vAd: new Vector(148.5, 240)
     },
+    coloumns: [
+        {
+            vAs: new Vector(150, 1),
+            vDs: new Vector(143, 55),
+            vAd: new Vector(0, 380),
+            vDd: new Vector(320, 100)
+        },
+        {
+            vAs: new Vector(150, 1),
+            vDs: new Vector(143, 55),
+            vAd: new Vector(0, 380),
+            vDd: new Vector(320, 100)
+        }
+    ],
     getReady: {
         vAs: new Vector(0, 0),
         vDs: new Vector(130, 900)

@@ -107,7 +107,6 @@ class Game{
         this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
         this.elements.bird.entity.set(this.elements.bird.vAd, new Vector(25,25));
 
-        
 
         //moving terrain
         let dTerrain = this.elements.terrain.entity.copy();
@@ -115,7 +114,7 @@ class Game{
         this.elements.terrain.vAd.x -= 0.6;
         if(this.elements.terrain.vAd.sum(new Vector(314, 0)).x < 0)
             this.elements.terrain.vAd.x = 0
-        //
+        
 
         //bird fall
         this.elements.bird.vAd.y += this.birdSpeed;
@@ -126,7 +125,7 @@ class Game{
         //bird jump
         this.handleJump();
 
-
+        
     }
 
 
