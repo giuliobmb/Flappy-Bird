@@ -74,7 +74,7 @@ class Game{
         this.birdSpeed = 2.3;
         this.jumping = false;
         this.jumped = 0;
-        this.coloumnSpeed = -3;
+        this.coloumnSpeed = 3;
         this.cDistance = Math.random()*300 + 100;
     }
     setup(){
@@ -113,17 +113,16 @@ class Game{
         
         //coloumns 
         let dColoumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
-
+        
         this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[0].vDd);
         this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[1].vDd);
 
-        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed+this.cDistance, 0)), this.elements.coloumns[0].vDd);
-        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed+this.cDistance, 0)), this.elements.coloumns[1].vDd);
+        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed-this.cDistance, 0)), this.elements.coloumns[0].vDd);
+        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed-this.cDistance, 0)), this.elements.coloumns[1].vDd);
 
         if(this.elements.coloumns[0].x < 0){
             this.elements.coloumns[0].x = 320;
             this.elements.coloumns[1].x = 320;
-            this.coloumnSpeed = 30;
         }
 
 
