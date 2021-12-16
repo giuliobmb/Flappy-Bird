@@ -74,7 +74,8 @@ class Game{
         this.birdSpeed = 2.3;
         this.jumping = false;
         this.jumped = 0;
-        this.coloumnSpeed = 30;
+        this.coloumnSpeed = -3;
+        this.cDistance = Math.random()*300 + 100;
     }
     setup(){
         this.elements.background.entity = new Entity(new Sprite(this.sprites, this.elements.background.vAs, this.elements.background.vDs));
@@ -113,12 +114,19 @@ class Game{
         //coloumns 
         let dColoumns = [this.elements.coloumns[0].entity.copy(), this.elements.coloumns[1].entity.copy()];
 
-        this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[0].vDd);
-        this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[1].vDd);
+        this.elements.coloumns[0].entity.set(this.elements.coloumns[0].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[0].vDd);
+        this.elements.coloumns[1].entity.set(this.elements.coloumns[1].vAd.sub(new Vector(this.coloumnSpeed, 0)), this.elements.coloumns[1].vDd);
 
-        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed+Math.random()*100, 0)), this.elements.coloumns[0].vDd);
-        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed+Math.random()*100, 0)), this.elements.coloumns[1].vDd);
-        this.coloumnSpeed--;
+        dColoumns[0].set(this.elements.coloumns[0].vAd.sum(new Vector(this.coloumnSpeed+this.cDistance, 0)), this.elements.coloumns[0].vDd);
+        dColoumns[1].set(this.elements.coloumns[1].vAd.sum(new Vector(this.coloumnSpeed+this.cDistance, 0)), this.elements.coloumns[1].vDd);
+
+        if(this.elements.coloumns[0].x < 0){
+            this.elements.coloumns[0].x = 320;
+            this.elements.coloumns[1].x = 320;
+            this.coloumnSpeed = 30;
+        }
+
+
         
         //moving terrain
         this.elements.terrain.entity.set(this.elements.terrain.vAd, this.elements.terrain.vDd);
